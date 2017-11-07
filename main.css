@@ -1,30 +1,112 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
 body {
     margin:0; padding:20px;
-    background:#DDD;
+    background:#F1F1F1;
     font-family:monospace;
     color:#222;
-    max-width:600px;
+    max-width:680px;
+      
 }
+body>div>button, h2 button , select, button[help]{
+    background:#607D8B;
+    box-shadow:0px 0px 2px #AAA;
+    padding:6px 12px !important;
+    border:none;
+    border-radius: 0px;
+    border-bottom:2px solid #455A64;
+    color:white;
+    display: inline-block;
+    transition:all .2s;
+    outline:none;
+}
+select {
+        padding: 3px 5px 4px 5px !important;
+}
+button[help] {
+    background:#78909C;
+    box-shadow:none;
+}
+button[disabled] {
+    border-bottom-color:#607D8B;
+    box-shadow: none !important;
+    cursor:not-allowed;
+    color:#DEDEDE;
+}
+h2 button {
+    background:#3F51B5;
+    border-bottom-color: #283593;
+}
+body>div>button:hover, h2 button:hover , select:hover{
+    box-shadow:0px 2px 4px #999;
+}
+body>div>button:active, h2 button:active , select:active{
+    box-shadow:0px 2px 4px #444 inset;
+    background:#455A64;
+}
+hr {
+    height:2px;
+    background:#607D8B;
+    border:none;
+ BORDER-RADIUS:50%;}
 table tr td {
-    border:1px solid #444;
+    border:1px solid #999;
+   
     padding:5px;
     border-collapse: collapse;
 }
 table tr td:hover {
-    background:#999;
+    background:#AAA;
 }
 td.on {
     background:#66BB6A;
+}
+td.on-few {
+    background:#FF8844;
 }
 table {
      border-collapse: collapse;
      margin:5px;
 }
-container {
-    border:1px solid #999;
-    padding:5px;
+container ,#UICompetition {
+    border:2px solid #607D8B;
+    border-left:12px solid #607D8B;
+    background:#fff;
+    padding:5px 8px;
     margin:10px;
+    transition:all .2s;
     display:block;
+    border-radius: 3px;
+    box-shadow: -1px 0px 3px #999;
+}
+#UICompetition {
+ display: none;
+ border-color:#F44;
+}
+#UIErrorHolder container[fatal] { border-color:#F44; }
+#UIErrorHolder container[violation] { border-color:#62c; }
+#UIErrorHolder container[warn] { border-color:#F84; }
+#UIErrorHolder { display: none; }
+#UICompetition div{
+    border:1px solid #444;
+    height:10px;
+}
+#QSProgress {
+    background:#444;
+    display: block;
+    margin:-1px;
+    height:12px;
+}
+
+container:hover {
+     background:#ddd;
+    border-color:#48F;
+}
+body container:last-child {
+    animation:whoosh .5s;
+}
+@keyframes whoosh {
+    0% { opacity:.1; margin-top:50px; }
+    100% { opacity:1; margin-top:10px; }
 }
 table span {
     padding:0 5px;
@@ -51,11 +133,16 @@ button {
     text-align: center;
     border: 10px;
 }
+#UIElementHolder {
+    max-height: calc( 100% - 150px);
+    overflow-x: HIDDEN;
+    overflow-y: AUTO;
+}
 /*lazy editor*/
-#ultimateEditor {
+#ultimateEditor , #ultimateStat{
     position:fixed;
     
-    height:600px;
+    height:400px;
     right:-650px; top:20px; bottom:20px;
     width:340px;
     padding:20px;
@@ -63,6 +150,29 @@ button {
     background:#FEFEFE;
     transition:all .3s;
 }
+#ultimateStat:hover {
+    border-left:2px solid #666;
+}
+#ultimateStat::before {
+        content: 'stats';
+    position: absolute;
+    background: #ddd;
+    top: 300px;
+    left: -30px;
+    transform: rotate(-90deg);
+    color: black;
+    margin-left: -19px;
+    padding: 3px;
+    border-radius: 3px;
+}
+#ultimateStat:hover::before {
+    content: '';
+}
+#ultimateStat {
+    border-left:50px solid #666;
+     right:-390px;
+}
+
 #ultimateEditor textarea {
     display:block;
     width:100%;
@@ -70,20 +180,44 @@ button {
     border:none;
     font-size:10px;
 }
-#ultimateEditor.on {
-    right:20px;
+
+#ultimateEditor.on , #ultimateStat:hover, #ultimateStat.on {
+    right:16px;
+    box-shadow:0px 2px 3px #999;
 }
-code {
-    background: #AAA;
-    padding: 5px;
-    color:black;
-}
-code:hover {
-    background:#AAA;
-    cursor:pointer;
-}
+
 @media screen and (min-width:1200px) {
     body {
         zoom:1.2;
     }
+}
+.blink {
+    animation:blinkit .9s;
+}
+@keyframes blinkit {
+    0% { border:2px solid #48F; }
+    100% { border:2px solid #999; }
+}
+
+/*stat window*/
+#proghold {
+     width: 340px;
+    height: 150px;
+}
+#proghold span {
+    display: inline-block;
+    background:#48F;
+}
+code {
+    padding:6px 10px;
+    background:#DDD;
+}
+code:hover {
+    background:#AAA;
+    cursor: help;
+}
+/**/
+details {
+    border-left:3px solid #48F;
+    padding:5px 7px;
 }

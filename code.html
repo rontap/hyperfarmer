@@ -1,0 +1,95 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="main.css">
+<h2>AI Editor <button onclick="saveCode();">Save</button> <button onclick="onTheRunAndGo();">Save & Exit & Run</button></h2>
+<hr>
+<input type="checkbox" id="externalURL"><label for="externalURL">Use External JS - write the location of the script instead of code</label>
+<hr>
+<div>
+ <button onclick="newAI();"> New AI </button> | Selected AI
+  <button onclick="renameAI();"> Rename...  </button>
+  <button onclick="location.href='about.html'" disabled> Delete  </button>
+<hr>
+</div>
+<holder onclick="changeCurrCode(event);" id="AIStore">
+    <div>rontap AI v3</div>
+    <div>rontap AI v2</div>
+    <div class="on">Advanced AI</div>
+    
+</holder>
+
+<textarea id="currCodeInput" placeholder="write code or insert URL here"></textarea>
+
+<style>
+    holder {
+        position:fixed;
+        bottom:0;
+        left:0;
+        top:150px;
+        width:150px;
+        border-top:3px solid #444;
+
+    }
+    holder div {
+        border-right:3px solid transparent;
+        border-bottom:1px solid #444;
+        padding:20px 10px;
+        transition:background .2s;
+        cursor:pointer;
+    }
+    holder div.on {
+        background:#3F51B5;
+        color:White;
+
+    }
+    textarea {
+        position:fixed;
+        left:150px;
+        right:0px;
+        bottom:0;
+        top:150px;
+        resize:none;
+        width: calc(100% - 150px);
+        background:#EEE;
+        border:1px solid #444;
+
+        padding:10px;
+    }
+</style>
+
+<script>
+    
+    currCodeOn = 2;
+    function changeCurrCode(e) {
+        $$('holder div')[currCodeOn].classList.remove('on');
+        e.path[0].classList.add('on')
+        currCodeOn = $$('holder div').indexOf(e.path[0]);
+        currDoc=String(window.opener.AIL[currCodeOn]);
+        currCodeInput.value = currDoc.slice(23+1,currDoc.length-1);
+    }
+    
+    function saveCode() {
+        window.opener.AILstore(currCodeInput.value, currCodeOn, $$('holder div')[currCodeOn].innerHTML );
+    }
+    function onTheRunAndGo() {
+         window.opener.AILstore(currCodeInput.value, currCodeOn);
+         window.opener.AIListActivateAll('X');
+         window.close();
+    }
+    function newAI() {
+        $('#AIStore').innerHTML+="<div>" + prompt("Enter New AI name:", "AI " + Math.floor(Math.random()*10000)) + "</div>";
+    }
+    function renameAI() {
+        $$('holder div')[currCodeOn].innerHTML = prompt("Enter New AI Script name:", $$('holder div')[currCodeOn].innerHTML );
+    }
+    
+$    = (call)    =>  document.querySelector(call)
+$$   = (call)    =>  document.querySelectorAll(call)
+
+NodeList.prototype.indexOf = function(element) {
+    return [...this].indexOf(element);
+}
+
+Array.prototype.max = function(){  return Math.max(...this); }
+Array.prototype.min = function(){  return Math.min(...this); }
+  
+</script>
